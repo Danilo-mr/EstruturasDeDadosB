@@ -5,7 +5,7 @@
 
 using namespace std;
 
-#define n 40000
+#define n 200000
 
 int main() {
   setlocale(LC_ALL,"PORTUGUESE");
@@ -13,7 +13,7 @@ int main() {
   clock_t start, finish;
 
   int i, v[n], aux, stop=0, j, opc;
-  long qtd_comp=0, qtd_trocas=0;
+  long long int qtd_comp=0, qtd_trocas=0;
   double duracao;
   cout << "\tComo vai querer o vetor?";
   cout << "\n(1)Vetor preenchido com números aleatórios";
@@ -61,8 +61,8 @@ int main() {
   finish=clock();
   duracao = (double)(finish-start)/CLOCKS_PER_SEC;
 
-  cout << "\n\n\nComparações: " << qtd_comp;
+  cout << "\n\n\nComparacoes: " << qtd_comp;
   cout << "\nTrocas: " << qtd_trocas;
-  cout << "\nTempo de execução: "  << duracao << "s"; 
+  cout << "\nTempo de execucao: "  << duracao << "s"; 
   cout << "\n\n\n";
 }
