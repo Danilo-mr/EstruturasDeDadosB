@@ -17,8 +17,10 @@ double selection(int v[]){
         for(i=n-1; i>j; i--){
             qtd_comp++;
             if(v[i]<menor)
+            {
                 escolhido=i;
                 flag=1;
+            }
         }
         if(flag==1){
             qtd_trocas++;
@@ -50,7 +52,7 @@ void vetorInverso(int v[]){
 }
 
 void impressao(double d){
-    cout << "\n\n\nComparacoes: " << qtd_comp;
+    cout << "\n\nComparacoes: " << qtd_comp;
     cout << "\nTrocas: " << qtd_trocas;
     cout << "\nTempo de execucao: "  << d << "s"; 
 }
