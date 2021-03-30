@@ -6,7 +6,7 @@ using namespace std;
 
 int qtd_comp, qtd_trocas;
 
-#define n 2000
+#define n 30
 
 double selection(int v[]){
     clock_t start, finish;
@@ -51,11 +51,19 @@ void vetorInverso(int v[]){
         v[i] = n-i;
 }
 
-void impressao(double d){
+void resultado(double d){
     cout << "\n\nComparacoes: " << qtd_comp;
     cout << "\nTrocas: " << qtd_trocas;
     cout << "\nTempo de execucao: "  << d << "s"; 
 }
+
+void imprimir(int v[]) {
+    int i;
+    for (i=0; i<n; i++){
+        cout << v[i] << endl;
+    }
+}
+
 int main() {
     int v[n];
     double duracao;
@@ -63,16 +71,17 @@ int main() {
     cout << "\n\nVetor preenchido aleatoriamente";
     vetorAleatorio(v);
     duracao=selection(v);
-    impressao(duracao);
+    resultado(duracao);
+    imprimir(v);
 
     cout << "\n\nVetor Inversamente preenchido";
     vetorInverso(v);
     duracao=selection(v);
-    impressao(duracao);
+    resultado(duracao);
 
     cout << "\n\nVetor previamente ordenado";
     vetorOrdenado(v);
     duracao=selection(v);
-    impressao(duracao);
+    resultado(duracao);
    
 }
