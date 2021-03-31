@@ -1,3 +1,5 @@
+/* 1. Implemente os métodos de busca estudados e compare os resultados na busca por um elemento em uma sequência de 100.000 elementos. Compare os resultados.*/
+
 #include <iostream>
 #include <ctime>
 #include <iomanip>
