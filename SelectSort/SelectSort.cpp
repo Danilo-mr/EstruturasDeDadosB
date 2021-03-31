@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define n 20
+#define n 200000
 
 long long int qtd_comp=0, qtd_trocas=0;
 double duracao;
@@ -78,6 +78,7 @@ int main() {
     vetorInverso(v);
     selection(v);
     resultado();
+    
 
     cout << "\n\n\n\t\t\tVETOR ALEATORIO...";
     vetorAleatorio(v);
