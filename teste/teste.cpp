@@ -5,16 +5,24 @@
 
 using namespace std;
 
-#define n 200000
+#define n 2000
+
+void imprimir(int v[])
+{
+    for(int i=0; i<n; i++)
+        cout << v[i] << " ";
+    cout << endl;
+}
 
 int main() {
   setlocale(LC_ALL,"PORTUGUESE");
   
   clock_t start, finish;
 
-  int i, v[n], aux, stop=0, j, opc;
+  int i, v[n], aux, stop=0, j, opc, lugarTroca;
   long long int qtd_comp=0, qtd_trocas=0;
   double duracao;
+  bool troca;
   cout << "\tComo vai querer o vetor?";
   cout << "\n(1)Vetor preenchido com numeros aleatorios";
   cout << "\n(2)Vetor previamente ordenado";
@@ -42,13 +50,14 @@ int main() {
       break;
   }
   cout << "\n\n\t\t\t\t\t\tOrdenando...";
-  
-  start=clock();
-  for(stop=0; stop<n-1; stop++){
+  lugarTroca=n-1;
+  troca=true;
+  for(stop=0; stop<n-1 && troca==true; stop++){
+    troca=false;
     for(i=n-1; i>stop; i--){
-      
       qtd_comp++;
       if(v[i]<v[i-1]){ 
+        troca=true;
         qtd_trocas++;
         aux=v[i];
         v[i]=v[i-1];
@@ -65,4 +74,6 @@ int main() {
   cout << "\nTrocas: " << qtd_trocas;
   cout << "\nTempo de execucao: "  << duracao << "s"; 
   cout << "\n\n\n";
+  imprimir(v);
 }
+

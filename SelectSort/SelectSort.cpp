@@ -40,7 +40,7 @@ void selection(int v[]){
 
 
     start=clock();
-    for(i=0; i<n-1; i++)
+    for(i=0; i<n; i++)
     {
         pos=i;
         for(j=i+1; j<n; j++)
