@@ -24,7 +24,12 @@ void inserir(int n, no **raiz){
     if((*raiz)==NULL)
     {
         *raiz = (no*) malloc(sizeof(no));
+        if((*raiz)==NULL){
+            cout << "\n\t\tHeap Overflow";
+            return;
+        }
         (*raiz)->chave=n;
+        cout << "\n\t\tElemento inserido com SUCESSO!";
         (*raiz)->esq = (*raiz)->dir =NULL;
     } else {
         if(n < (*raiz)->chave) 
@@ -74,7 +79,7 @@ int main() {
     do {
         cout << "\n\n\n\t\t=====MENU=====";
         cout << "\n\t\t1 - Inserir";
-        cout << "\n\t\t2 - Consultar";
+        cout << "\n\t\t2 - Buscar";
         cout << "\n\t\t3 - Percursos";
         cout << "\n\t\t0 - Sair";
         cout << "\n\n\t\tOpcao: ";
