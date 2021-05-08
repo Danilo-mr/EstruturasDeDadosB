@@ -244,9 +244,9 @@ int main() {
         cout << "\n\t\t16- Quantidade de nos com dois filhos"; //fazer
         cout << "\n\t\t17- Quantidade de nos com um filho"; //fazer
         cout << "\n\t\t18- Quantidade de folhas"; //fazer
-        cout << "\n\t\t19- Percorrer a arvore em ordem"; //fazer
-        cout << "\n\t\t20- Percorrer a arvore em preordem"; //fazer
-        cout << "\n\t\t21- Percorrer a arvore em posordem"; //fazer
+        cout << "\n\t\t19- Percorrer a arvore em ordem"; 
+        cout << "\n\t\t20- Percorrer a arvore em preordem"; 
+        cout << "\n\t\t21- Percorrer a arvore em posordem"; 
         cout << "\n\t\t22- Percorrer a arvore em largura"; //fazer
         cout << "\n\t\t23- Salvar a arvore em arquivo"; //fazer
         cout << "\n\t\t24- Recuperar a arvore de arquivo"; //fazer
