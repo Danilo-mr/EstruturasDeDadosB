@@ -11,6 +11,7 @@ O programa deve ter como base um menu de opções com pelo menos as seguintes fu
 */
 #include <iostream>
 #include <stdlib.h>
+#include <math.h>
 
 using namespace std;
 
@@ -124,6 +125,10 @@ int main() {
     } while(opc!=0);*/
    
     
-    
+    float x=100;
+    int y=4;
+
+    x=sqrt(x/y);
+    cout << x;
 
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <math.h>
 
 using namespace std;
 
@@ -172,6 +173,30 @@ void decrescente(no *raiz){
     }
 }
 
+unsigned int soma(no *raiz){
+    unsigned int s=0;
+    if(raiz!=NULL){
+        s=raiz->chave;
+        if(raiz->esq!=NULL) s+=soma(raiz->esq);
+        if(raiz->dir!=NULL) s+=soma(raiz->dir);
+        return s;
+    } else 
+        cout << "\n\tArvore vazia";
+    return s;
+}
+
+float desvioPadrao(no *raiz, float media){
+    float des=0.0;
+    if(raiz!=NULL){
+        des=pow((float)raiz->chave-media, 2);
+        if(raiz->esq!=NULL) des+=desvioPadrao(raiz->esq, media);
+        if(raiz->dir!=NULL) des+=desvioPadrao(raiz->dir, media);
+        return des;
+    } else
+        cout << "\n\tArvore vazia";
+    return des;
+}
+
 void em(no *raiz) {
     if(raiz!=NULL){
         em(raiz->esq);
@@ -196,7 +221,8 @@ void pos(no *raiz) {
 
 int main() {
     no *raiz=NULL;
-    int opcaoMenu, n;
+    int opcaoMenu, n, qtd, k;
+    float media;
     char resp;
     do {
         cout << "\n\n\n\t\t=====MENU=DE=OPCOES=DA=ARVORE=====";
@@ -209,15 +235,15 @@ int main() {
         cout << "\n\t\t 7- Altura da arvore(niveis)"; 
         cout << "\n\t\t 8- Quantidade de elementos pares e impares";
         cout << "\n\t\t 9- Imprimir multiplos de 'k' e quantidade"; 
-        cout << "\n\t\t10- Imprimir em ordem crescente"; 
-        cout << "\n\t\t11- Imprimir em ordem decrescente"; 
-        cout << "\n\t\t12- Imprimir a soma dos valores dos nos"; 
-        cout << "\n\t\t13- Imprimir a media dos valores dos nos"; //fazer
-        cout << "\n\t\t14- Imprimir o desvio padrao dos valores dos nos"; //fazer
-        cout << "\n\t\t15- Imprimir a quantidade de NULLs presente na arvore"; //fazer
-        cout << "\n\t\t16- Imprimir a quantidade de nos com dois filhos"; //fazer
-        cout << "\n\t\t17- Imprimir a quantidade de nos com um filho"; //fazer
-        cout << "\n\t\t18- Imprimir a quantidade de folhas"; //fazer
+        cout << "\n\t\t10- Ordem crescente"; 
+        cout << "\n\t\t11- Ordem decrescente"; 
+        cout << "\n\t\t12- Soma dos valores dos nos"; 
+        cout << "\n\t\t13- Media dos valores dos nos";
+        cout << "\n\t\t14- Desvio padrao dos valores dos nos";
+        cout << "\n\t\t15- Quantidade de NULLs presente na arvore";
+        cout << "\n\t\t16- Quantidade de nos com dois filhos"; //fazer
+        cout << "\n\t\t17- Quantidade de nos com um filho"; //fazer
+        cout << "\n\t\t18- Quantidade de folhas"; //fazer
         cout << "\n\t\t19- Percorrer a arvore em ordem"; //fazer
         cout << "\n\t\t20- Percorrer a arvore em preordem"; //fazer
         cout << "\n\t\t21- Percorrer a arvore em posordem"; //fazer
@@ -231,7 +257,6 @@ int main() {
         cin >> opcaoMenu;
         switch (opcaoMenu) {
             case 1:
-
                 do {
                     cout << "\n\n\tQual valor a ser inserido? ";
                     cin >> n;
@@ -288,7 +313,6 @@ int main() {
                 break;
 
             case 9:
-                int k, qtd;
                 cout << "\n\tValor de 'K' :";
                 cin >> k; 
                 cout << "\n\t" << k << " = { ";
@@ -303,6 +327,20 @@ int main() {
             
             case 11:
                 decrescente(raiz);
+                break;
+
+            case 12:
+                cout << "\n\tSoma dos valores dos nos: " << soma(raiz);
+                break;
+            
+            case 13:
+                cout << "\n\tMedia dos valores dos nos: " << (float)soma(raiz)/qtdElem(raiz);
+                break;
+
+            case 14:
+                media=(float)soma(raiz)/qtdElem(raiz);
+                qtd = qtdElem(raiz);
+                cout << "\n\tDesvio padrao: " << sqrt(desvioPadrao(raiz, media)/qtd);
                 break;
 
             case 19:
