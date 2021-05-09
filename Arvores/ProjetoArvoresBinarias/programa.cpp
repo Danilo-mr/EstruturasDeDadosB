@@ -197,6 +197,37 @@ float desvioPadrao(no *raiz, float media){
     return des;
 }
 
+unsigned int qtd2Filhos(no *raiz){
+    unsigned int cont=0;
+    if(raiz!=NULL){
+        if(raiz->esq!=NULL){
+            if(raiz->dir!=NULL) cont++;
+            cont+=qtd2Filhos(raiz->esq);
+        } 
+        if(raiz->dir!=NULL) cont+=qtd2Filhos(raiz->dir);
+        return cont;
+    } else 
+        cout << "\n\tArvore Vazia";
+    return cont;
+}
+
+unsigned int qtd1Filho(no *raiz){
+    unsigned int cont=0;
+    if(raiz!=NULL){
+        if(raiz->esq!=NULL){
+            if(raiz->dir==NULL) cont++;
+            cont+=qtd1Filho(raiz->esq);
+        }
+        if(raiz->dir!=NULL){
+            if(raiz->esq==NULL) cont++;
+            cont+=qtd1Filho(raiz->dir);
+        }
+        return cont;
+    } else  
+        cout << "\n\tArvore Vazia";
+    return cont;
+}
+
 void em(no *raiz) {
     if(raiz!=NULL){
         em(raiz->esq);
@@ -241,8 +272,8 @@ int main() {
         cout << "\n\t\t13- Media dos valores dos nos";
         cout << "\n\t\t14- Desvio padrao dos valores dos nos";
         cout << "\n\t\t15- Quantidade de NULLs presente na arvore";
-        cout << "\n\t\t16- Quantidade de nos com dois filhos"; //fazer
-        cout << "\n\t\t17- Quantidade de nos com um filho"; //fazer
+        cout << "\n\t\t16- Quantidade de nos com dois filhos"; 
+        cout << "\n\t\t17- Quantidade de nos com um filho"; 
         cout << "\n\t\t18- Quantidade de folhas"; //fazer
         cout << "\n\t\t19- Percorrer a arvore em ordem"; 
         cout << "\n\t\t20- Percorrer a arvore em preordem"; 
@@ -341,6 +372,18 @@ int main() {
                 media=(float)soma(raiz)/qtdElem(raiz);
                 qtd = qtdElem(raiz);
                 cout << "\n\tDesvio padrao: " << sqrt(desvioPadrao(raiz, media)/qtd);
+                break;
+            
+            case 15:
+
+                break;
+
+            case 16:
+                cout << "Quantidade de nos com dois filhos: " << qtd2Filhos(raiz);
+                break;
+
+            case 17:
+                cout << "Quantidade de nos com um filho: " << qtd1Filho(raiz);
                 break;
 
             case 19:
