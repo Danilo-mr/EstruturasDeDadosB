@@ -228,6 +228,29 @@ unsigned int qtd1Filho(no *raiz){
     return cont;
 }
 
+unsigned int qtdNull(no *raiz){
+    unsigned int cont=0;
+    if(raiz!=NULL){
+        if(raiz->esq==NULL) cont++;
+        else cont+=qtdNull(raiz->esq);
+        if(raiz->dir==NULL) cont++;
+        else cont+=qtdNull(raiz->dir);
+        return cont;
+    } else cout << "\n\tArvore vazia";
+    return cont;
+}
+
+unsigned int qtdFolhas(no *raiz){
+    unsigned int cont=0;
+    if(raiz!=NULL){
+        if(raiz->esq==NULL && raiz->dir==NULL) cont++;
+        if(raiz->esq!=NULL) cont+=qtdFolhas(raiz->esq);
+        if(raiz->dir!=NULL) cont+=qtdFolhas(raiz->dir);
+        return cont;
+    } else cout << "\n\tArvore vazia";
+    return cont;
+}
+
 void em(no *raiz) {
     if(raiz!=NULL){
         em(raiz->esq);
@@ -274,7 +297,7 @@ int main() {
         cout << "\n\t\t15- Quantidade de NULLs presente na arvore";
         cout << "\n\t\t16- Quantidade de nos com dois filhos"; 
         cout << "\n\t\t17- Quantidade de nos com um filho"; 
-        cout << "\n\t\t18- Quantidade de folhas"; //fazer
+        cout << "\n\t\t18- Quantidade de folhas";
         cout << "\n\t\t19- Percorrer a arvore em ordem"; 
         cout << "\n\t\t20- Percorrer a arvore em preordem"; 
         cout << "\n\t\t21- Percorrer a arvore em posordem"; 
@@ -375,17 +398,21 @@ int main() {
                 break;
             
             case 15:
-
+                cout << "\n\tQuantidade de NULLs: " << qtdNull(raiz);
                 break;
 
             case 16:
-                cout << "Quantidade de nos com dois filhos: " << qtd2Filhos(raiz);
+                cout << "\n\tQuantidade de nos com dois filhos: " << qtd2Filhos(raiz);
                 break;
 
             case 17:
-                cout << "Quantidade de nos com um filho: " << qtd1Filho(raiz);
+                cout << "\n\tQuantidade de nos com um filho: " << qtd1Filho(raiz);
                 break;
 
+            case 18:
+                cout << "\n\tQuantidade de folhas: " << qtdFolhas(raiz);
+                break;
+            
             case 19:
                 em(raiz);
                 break;
