@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 
@@ -367,11 +368,11 @@ int main() {
         cout << "\n\t\t19- Percorrer a arvore em ordem"; 
         cout << "\n\t\t20- Percorrer a arvore em preordem"; 
         cout << "\n\t\t21- Percorrer a arvore em posordem"; 
-        cout << "\n\t\t22- Percorrer a arvore em largura"; //fazer
+        cout << "\n\t\t22- Percorrer a arvore em largura";
         cout << "\n\t\t23- Salvar a arvore em arquivo"; //fazer
         cout << "\n\t\t24- Recuperar a arvore de arquivo"; //fazer
         cout << "\n\t\t25- Trocar de arvore"; //fazer
-        cout << "\n\t\t26- Comparar duas arvores"; 
+        cout << "\n\t\t26- Comparar duas arvores"; //fazer
         cout << "\n\t\t 0- Sair";
         cout << "\n\n\t\tOpcao: ";
         cin >> opcaoMenu;
@@ -493,6 +494,10 @@ int main() {
             
             case 22:
                 largura(raiz, &fila);
+                break;
+
+            case 23:
+                
                 break;
 
             case 26:

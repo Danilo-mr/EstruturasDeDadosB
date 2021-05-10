@@ -12,6 +12,7 @@ O programa deve ter como base um menu de opções com pelo menos as seguintes fu
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 
@@ -124,13 +125,30 @@ int main() {
         system("cls");
     } while(opc!=0);*/
    
+    string data;
+
+    ofstream outfile; ///out file - levar dados para o arquivo
+    outfile.open("AquiNoVSCode.txt"); ///Cria um arquivo com este nome e abre no modo out
+    if(outfile.is_open() && outfile.good()){ ///Verifica se está tudo bem
+        cout << "Digite algo para colocar no arquivo: \n";
+        getline(cin, data);
+        outfile << data << endl;
+        cout << "Digite algo a mais: ";
+        getline(cin, data);
+        outfile << data << endl;
+        outfile.close();
+    }
+
+    ifstream infile;
+
+    infile.open("AquiNoVSCode.txt");
+    if(infile.is_open() && infile.good()) {
+        cout << "Lendo o que tem no arquivo" << endl;
+        cout << "===========================\n";
+        getline(infile, data);
+        cout <<  data << endl;
+    }
+    infile.close();
     
-    no *raiz=NULL;
-    raiz = (no*) malloc(sizeof(no));
-    raiz->chave=90;
-    cout << "\nraiz: " << raiz;
-    cout << "\nraiz->chave: " << raiz->chave;
-    cout << "\nraiz->esq: " << raiz->esq;
-    cout << "\nraiz->dir: " << raiz->dir;
 
 }
