@@ -125,10 +125,12 @@ int main() {
     } while(opc!=0);*/
    
     
-    float x=100;
-    int y=4;
-
-    x=sqrt(x/y);
-    cout << x;
+    no *raiz=NULL;
+    raiz = (no*) malloc(sizeof(no));
+    raiz->chave=90;
+    cout << "\nraiz: " << raiz;
+    cout << "\nraiz->chave: " << raiz->chave;
+    cout << "\nraiz->esq: " << raiz->esq;
+    cout << "\nraiz->dir: " << raiz->dir;
 
 }

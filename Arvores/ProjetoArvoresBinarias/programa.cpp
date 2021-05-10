@@ -10,6 +10,11 @@ struct no{
     struct no *dir;
 };
 
+struct dado{
+    int cod;
+    struct dado *prox;
+};
+
 void inserir(int n, no **raiz){
     if((*raiz)==NULL)
     {
@@ -53,7 +58,7 @@ int mydel(no **x){
     }
 }
 
-void remover(no **raiz, int n){
+void removerArv(no **raiz, int n){
     if((*raiz)!=NULL) {
         if((*raiz)->chave==n) {
             no *aux;
@@ -72,8 +77,8 @@ void remover(no **raiz, int n){
             cout << "\nRemovido com SUCESSO!";
             return;  
         }
-        else if (n<(*raiz)->chave) remover(&(*raiz)->esq, n);
-        else if (n>(*raiz)->chave) remover(&(*raiz)->dir, n);
+        else if (n<(*raiz)->chave) removerArv(&(*raiz)->esq, n);
+        else if (n>(*raiz)->chave) removerArv(&(*raiz)->dir, n);
     } else 
         cout << "\nElemento nao existe";
 }
@@ -273,8 +278,69 @@ void pos(no *raiz) {
     }
 }
 
+void removerFila(dado **fila){
+    if((*fila)!=NULL){
+        dado *aux=(*fila);
+        (*fila)=(*fila)->prox;
+        free(aux);
+    }
+}
+
+int encontrar(int x, no **raiz){
+    if((*raiz)!=NULL){
+        if((*raiz)->chave==x) return 1;
+        else if(x<(*raiz)->chave){
+            if(encontrar(x, &(*raiz)->esq)==1) (*raiz)=(*raiz)->esq;
+        }
+        else if(x>(*raiz)->chave){
+            if(encontrar(x, &(*raiz)->dir)==1) (*raiz)=(*raiz)->dir;
+        }
+        return 1;
+    }
+}
+
+void inserirFila(dado **fila, no *raiz){
+    dado *aux, *aux2;
+    encontrar((*fila)->cod, &raiz);
+    if(raiz->esq!=NULL) {
+        aux2=(*fila);
+        while(aux2->prox!=NULL) aux2=aux2->prox;
+        aux = (dado*) malloc(sizeof(dado));
+        aux->cod=raiz->esq->chave;
+        aux->prox=NULL;
+        aux2->prox=aux;
+    }
+    if(raiz->dir!=NULL) {
+        aux2=(*fila);
+        while(aux2->prox!=NULL) aux2=aux2->prox;
+        aux = (dado*) malloc(sizeof(dado));
+        aux->cod=raiz->dir->chave;
+        aux->prox=NULL; 
+        aux2->prox=aux;
+    }
+}
+
+void largura(no *raiz, dado **fila){
+    if(raiz!=NULL){
+        *fila = (dado*) malloc(sizeof(dado));
+        (*fila)->cod=raiz->chave;
+        (*fila)->prox=NULL;
+        while((*fila)!=NULL){
+            inserirFila(&(*fila), raiz);
+            cout << (*fila)->cod << " ";
+            removerFila(fila);
+        }
+    } else 
+        cout << "\n\tArvore vazia";
+}
+
+int saoIguais(){
+
+}
+
 int main() {
     no *raiz=NULL;
+    dado *fila=NULL;
     int opcaoMenu, n, qtd, k;
     float media;
     char resp;
@@ -305,7 +371,7 @@ int main() {
         cout << "\n\t\t23- Salvar a arvore em arquivo"; //fazer
         cout << "\n\t\t24- Recuperar a arvore de arquivo"; //fazer
         cout << "\n\t\t25- Trocar de arvore"; //fazer
-        cout << "\n\t\t26- Comparar duas arvores"; //fazer
+        cout << "\n\t\t26- Comparar duas arvores"; 
         cout << "\n\t\t 0- Sair";
         cout << "\n\n\t\tOpcao: ";
         cin >> opcaoMenu;
@@ -326,7 +392,7 @@ int main() {
                 do {
                     cout << "\n\n\tQual valor a ser removido? ";
                     cin >> n;
-                    remover(&raiz, n);
+                    removerArv(&raiz, n);
                     cout << "\n\tRemover mais elementos?[S/N] : ";
                     cin >> resp;
                     resp=toupper(resp);
@@ -424,9 +490,15 @@ int main() {
             case 21:
                 pos(raiz);
                 break;
+            
+            case 22:
+                largura(raiz, &fila);
+                break;
 
-
+            case 26:
+                if(saoIguais()) cout << "\n\tArvores iguais";
                 
+                break;                
             default:
             break;
         }
