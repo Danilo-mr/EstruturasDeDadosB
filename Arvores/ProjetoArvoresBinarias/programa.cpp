@@ -335,6 +335,17 @@ void largura(no *raiz, dado **fila){
         cout << "\n\tArvore vazia";
 }
 
+void salvar(no *raiz, ofstream *arquivoS){
+    if(raiz!=NULL) {
+        if(raiz->esq!=NULL) salvar(raiz->esq, arquivoS);
+        *arquivoS << raiz->chave << endl;
+        if(raiz->dir!=NULL) salvar(raiz->dir, arquivoS);
+    } else {
+        cout << "\n\tArvore Vazia";
+        return;
+    }
+}
+
 int saoIguais(){
 
 }
@@ -342,9 +353,15 @@ int saoIguais(){
 int main() {
     no *raiz=NULL;
     dado *fila=NULL;
+
     int opcaoMenu, n, qtd, k;
     float media;
     char resp;
+
+    string nomeArq, linha;
+    ofstream arquivoS;
+    ifstream arquivoE;
+
     do {
         cout << "\n\n\n\t\t=====MENU=DE=OPCOES=DA=ARVORE=====";
         cout << "\n\t\t 1- Inserir"; 
@@ -369,7 +386,7 @@ int main() {
         cout << "\n\t\t20- Percorrer a arvore em preordem"; 
         cout << "\n\t\t21- Percorrer a arvore em posordem"; 
         cout << "\n\t\t22- Percorrer a arvore em largura";
-        cout << "\n\t\t23- Salvar a arvore em arquivo"; //fazer
+        cout << "\n\t\t23- Salvar a arvore em arquivo"; 
         cout << "\n\t\t24- Recuperar a arvore de arquivo"; //fazer
         cout << "\n\t\t25- Trocar de arvore"; //fazer
         cout << "\n\t\t26- Comparar duas arvores"; //fazer
@@ -497,7 +514,27 @@ int main() {
                 break;
 
             case 23:
-                
+                cout << "\n\tNome do arquivo a ser salvo: ";
+                cin >> nomeArq;
+
+                arquivoS.open(nomeArq);
+                if(arquivoS.is_open() && arquivoS.good()){
+                    salvar(raiz, &arquivoS);
+                    arquivoS.close();
+                    cout << "\n\tARVORE SALVA COM SUCESSO!";
+                } else 
+                    cout << "\n\tNao foi possivel abrir arquivo ou criar um arquivo com este nome";
+                break;
+
+            case 24:
+                cout << "\n\tNome do arquivo: ";
+                cin >> nomeArq;
+                arquivoE.open(nomeArq);
+                if(arquivoE.is_open() && arquivoE.good()){
+                    while(getline(arquivoE, linha))
+                        cout << linha << endl;
+                } else
+                    cout << "\n\tArquivo nao existe!";
                 break;
 
             case 26:

@@ -125,30 +125,34 @@ int main() {
         system("cls");
     } while(opc!=0);*/
    
-    string data;
+    string linha;
 
-    ofstream outfile; ///out file - levar dados para o arquivo
-    outfile.open("AquiNoVSCode.txt"); ///Cria um arquivo com este nome e abre no modo out
-    if(outfile.is_open() && outfile.good()){ ///Verifica se está tudo bem
-        cout << "Digite algo para colocar no arquivo: \n";
-        getline(cin, data);
-        outfile << data << endl;
+    ofstream arquivoS; ///out file - levar dados para o arquivo
+    arquivoS.open("AquiNoVSCode.txt"); ///Cria um arquivo com este nome e abre no modo out
+    if(arquivoS.is_open() && arquivoS.good()){ ///Verifica se está tudo bem
+        /*cout << "Digite algo para colocar no arquivo: \n";
+        getline(cin, linha);
+        arquivoS << linha << endl;
         cout << "Digite algo a mais: ";
-        getline(cin, data);
-        outfile << data << endl;
-        outfile.close();
+        getline(cin, linha);
+        arquivoS << linha << endl;*/
+        arquivoS << "Nome: eu";
+        arquivoS << "\n20anos";
+        arquivoS.close();
     }
 
-    ifstream infile;
+    ifstream arquivoE;
 
-    infile.open("AquiNoVSCode.txt");
-    if(infile.is_open() && infile.good()) {
+    arquivoE.open("AquiNoVSCode.txt");
+    if(arquivoE.is_open() && arquivoE.good()) {
         cout << "Lendo o que tem no arquivo" << endl;
         cout << "===========================\n";
-        getline(infile, data);
-        cout <<  data << endl;
+        while(getline(arquivoE, linha)){
+        cout << linha << endl;
+        }
+        
     }
-    infile.close();
+    arquivoE.close();
     
 
 }
