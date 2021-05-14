@@ -50,6 +50,17 @@ void menu(){
     cout << "\n\t\t 0- Sair";
 }
 
+void status(no *raiz[], int atual){
+    int nulas=0, i;
+    for(i=0; i<qtdArv; i++)
+        if(raiz[i]==NULL) nulas++;
+    cout << "\n\n\n\tSTATUS:";
+    cout << "\n\t\t+Disponiveis: " << qtdArv;
+    cout << "\n\t\t+Nulas: " <<  nulas;
+    cout << "\n\t\t+Inicializadas: " << qtdArv-nulas;
+    cout << "\n\t\t+Usando arvore: " << atual+1;
+}
+
 void inserir(int n, no **raiz){
     if((*raiz)==NULL)
     {
@@ -405,7 +416,6 @@ int valoresIguais(no *raiz1, no *raiz2){
 
 int main() {
     no *raiz[qtdArv];
-    no *raizAtual=NULL;
     no *raizAux=NULL;
     dado *fila=NULL;
   
@@ -427,6 +437,7 @@ int main() {
     do {
 
         menu();
+        status(raiz, atual); // Arvore sendo manipulada/ inicializadas e quais
         cout << "\n\n\t\tOpcao: ";
         cin >> opcaoMenu;
         switch (opcaoMenu) {
@@ -434,7 +445,7 @@ int main() {
                 do {
                     cout << "\n\n\tInserir valor.... ";
                     cin >> n;
-                    inserir(n, &raizAtual);
+                    inserir(n, &raiz[atual]);
                     cout << "\n\tInserir mais elementos?[S/N] : ";
                     cin >> resp;
                     resp=toupper(resp);
@@ -446,7 +457,7 @@ int main() {
                 do {
                     cout << "\n\n\tQual valor a ser removido? ";
                     cin >> n;
-                    removerArv(&raizAtual, n);
+                    removerArv(&raiz[atual], n);
                     cout << "\n\tRemover mais elementos?[S/N] : ";
                     cin >> resp;
                     resp=toupper(resp);
@@ -458,7 +469,7 @@ int main() {
                 do {
                     cout << "\n\n\tConsultar qual numero? ";
                     cin >> n;
-                    if(busca(n, raizAtual)==1) cout << "\tELEMENTO ENCONTRADO !";
+                    if(busca(n, raiz[atual])==1) cout << "\tELEMENTO ENCONTRADO !";
                     else cout << "\tELEMENTO NAO ENCONTRADO !";
                     cout << "\n\tConsultar mais numeros?[S/N] ";
                     cin >> resp;
@@ -467,86 +478,86 @@ int main() {
                 break;
             
             case 4:
-                cout << "\n\tMAIOR ELEMENTO: " << maiorElem(raizAtual);
+                cout << "\n\tMAIOR ELEMENTO: " << maiorElem(raiz[atual]);
                 break;
 
             case 5:
-                cout << "\n\tMENOR ELEMENTO: " << menorElem(raizAtual);
+                cout << "\n\tMENOR ELEMENTO: " << menorElem(raiz[atual]);
                 break;
 
             case 6:
-                cout << "\n\tQUANTIDADE DE ELEMENTOS: " << qtdElem(raizAtual);
+                cout << "\n\tQUANTIDADE DE ELEMENTOS: " << qtdElem(raiz[atual]);
                 break;
             
             case 7:
-                cout << "\n\tALTURA DA ARVORE: " << altura(raizAtual) << " niveis";
+                cout << "\n\tALTURA DA ARVORE: " << altura(raiz[atual]) << " niveis";
                 break;
 
             case 8:
-                cout << "\n\t" << qtdPar(raizAtual) << " pares e " << qtdImpar(raizAtual) << " impares";
+                cout << "\n\t" << qtdPar(raiz[atual]) << " pares e " << qtdImpar(raiz[atual]) << " impares";
                 break;
 
             case 9:
                 cout << "\n\tValor de 'K' :";
                 cin >> k; 
                 cout << "\n\t" << k << " = { ";
-                qtd=multiplos(raizAtual, k);
+                qtd=multiplos(raiz[atual], k);
                 cout << "}";
                 cout << "\n\t" << qtd << " multiplos de " << k;
                 break;
 
             case 10:
-                em(raizAtual);
+                em(raiz[atual]);
                 break;
             
             case 11:
-                decrescente(raizAtual);
+                decrescente(raiz[atual]);
                 break;
 
             case 12:
-                cout << "\n\tSoma dos valores dos nos: " << soma(raizAtual);
+                cout << "\n\tSoma dos valores dos nos: " << soma(raiz[atual]);
                 break;
             
             case 13:
-                cout << "\n\tMedia dos valores dos nos: " << (float)soma(raizAtual)/qtdElem(raizAtual);
+                cout << "\n\tMedia dos valores dos nos: " << (float)soma(raiz[atual])/qtdElem(raiz[atual]);
                 break;
 
             case 14:
-                media=(float)soma(raizAtual)/qtdElem(raizAtual);
-                qtd = qtdElem(raizAtual);
-                cout << "\n\tDesvio padrao: " << sqrt(desvioPadrao(raizAtual, media)/qtd);
+                media=(float)soma(raiz[atual])/qtdElem(raiz[atual]);
+                qtd = qtdElem(raiz[atual]);
+                cout << "\n\tDesvio padrao: " << sqrt(desvioPadrao(raiz[atual], media)/qtd);
                 break;
             
             case 15:
-                cout << "\n\tQuantidade de NULLs: " << qtdNull(raizAtual);
+                cout << "\n\tQuantidade de NULLs: " << qtdNull(raiz[atual]);
                 break;
 
             case 16:
-                cout << "\n\tQuantidade de nos com dois filhos: " << qtd2Filhos(raizAtual);
+                cout << "\n\tQuantidade de nos com dois filhos: " << qtd2Filhos(raiz[atual]);
                 break;
 
             case 17:
-                cout << "\n\tQuantidade de nos com um filho: " << qtd1Filho(raizAtual);
+                cout << "\n\tQuantidade de nos com um filho: " << qtd1Filho(raiz[atual]);
                 break;
 
             case 18:
-                cout << "\n\tQuantidade de folhas: " << qtdFolhas(raizAtual);
+                cout << "\n\tQuantidade de folhas: " << qtdFolhas(raiz[atual]);
                 break;
             
             case 19:
-                em(raizAtual);
+                em(raiz[atual]);
                 break;
 
             case 20:
-                pre(raizAtual);
+                pre(raiz[atual]);
                 break;
 
             case 21:
-                pos(raizAtual);
+                pos(raiz[atual]);
                 break;
             
             case 22:
-                largura(raizAtual, &fila);
+                largura(raiz[atual], &fila);
                 break;
 
             case 23:
@@ -555,7 +566,7 @@ int main() {
 
                 arquivoS.open(nomeArq);
                 if(arquivoS.is_open() && arquivoS.good()){
-                    salvar(raizAtual, &arquivoS);
+                    salvar(raiz[atual], &arquivoS);
                     arquivoS.close();
                     cout << "\n\tARVORE SALVA COM SUCESSO!";
                 } else 
@@ -563,24 +574,20 @@ int main() {
                 break;
 
             case 24:
-                if(raizAtual!=NULL) raiz[atual]=raizAtual;
                 cout << "\n\tNome do arquivo: ";
                 cin >> nomeArq;
                 arquivoE.open(nomeArq);
                 if(arquivoE.is_open() && arquivoE.good()){
                     while(arquivoE >> linha)
-                        inserir(linha, &raizAtual);
+                        inserir(linha, &raiz[atual]);
                 } else
                     cout << "\n\tArquivo nao existe!";
                 break;
 
             case 25:
-                raiz[atual]=raizAtual;
-                //menu da qtd. de arv. inicializadas e quais
                 cout << "\n\tQuer trocar por qual arvore? [1," << qtdArv << "]....:Arvore ";
                 cin >> atual;
                 atual--;
-                raizAtual=raiz[atual];
                 cout << "\n\tTrocado!";
                 break;
 
@@ -588,9 +595,9 @@ int main() {
                 cout << "\n\tComparar com qual arvore? [1," << qtdArv << "]....:Arvore ";
                 cin >> n;
                 raizAux=raiz[n-1];
-                if(iguais(raizAtual, raizAux)) cout << "\n\tSao iguais!";
-                else if(mesmaEstrutura(raizAtual, raizAux)) cout << "\n\tPossuem a mesma estrutura com valores diferente";
-                else if(qtdElem(raizAtual)==qtdElem(raizAux) && valoresIguais(raizAtual, raizAux)) cout << "\n\tPossuem os mesmos valores com estruturas diferentes";
+                if(iguais(raiz[atual], raizAux)) cout << "\n\tSao iguais!";
+                else if(mesmaEstrutura(raiz[atual], raizAux)) cout << "\n\tPossuem a mesma estrutura com valores diferente";
+                else if(qtdElem(raiz[atual])==qtdElem(raizAux) && valoresIguais(raiz[atual], raizAux)) cout << "\n\tPossuem os mesmos valores com estruturas diferentes";
                 else cout << "\n\tSao totalmente diferentes";               
                 break;                
             default:
