@@ -3,7 +3,7 @@
 #include <math.h>
 #include <fstream>
 #include <windows.h>
-
+#include <iomanip>
 using namespace std;
 
 #define qtdArv 100
@@ -19,46 +19,39 @@ struct dado{
     struct dado *prox;
 };
 
-void menu(){
-    cout << "\n\n\n\n\t\t=====MENU=DE=OPCOES=DA=ARVORE=====";
-    cout << "\n\t\t 1- Inserir"; 
-    cout << "\n\t\t 2- Remover"; 
-    cout << "\n\t\t 3- Buscar"; 
-    cout << "\n\t\t 4- Maior elemento"; 
-    cout << "\n\t\t 5- Menor elemento"; 
-    cout << "\n\t\t 6- Quantidade de elementos(nos)"; 
-    cout << "\n\t\t 7- Altura da arvore(niveis)"; 
-    cout << "\n\t\t 8- Quantidade de elementos pares e impares";
-    cout << "\n\t\t 9- Imprimir multiplos de 'k' e quantidade"; 
-    cout << "\n\t\t10- Ordem crescente"; 
-    cout << "\n\t\t11- Ordem decrescente"; 
-    cout << "\n\t\t12- Soma dos valores dos nos"; 
-    cout << "\n\t\t13- Media dos valores dos nos";
-    cout << "\n\t\t14- Desvio padrao dos valores dos nos";
-    cout << "\n\t\t15- Quantidade de NULLs presente na arvore";
-    cout << "\n\t\t16- Quantidade de nos com dois filhos"; 
-    cout << "\n\t\t17- Quantidade de nos com um filho"; 
-    cout << "\n\t\t18- Quantidade de folhas";
-    cout << "\n\t\t19- Percorrer a arvore em ordem"; 
-    cout << "\n\t\t20- Percorrer a arvore em preordem"; 
-    cout << "\n\t\t21- Percorrer a arvore em posordem"; 
-    cout << "\n\t\t22- Percorrer a arvore em largura";
-    cout << "\n\t\t23- Salvar a arvore em arquivo"; 
-    cout << "\n\t\t24- Recuperar a arvore de arquivo"; 
-    cout << "\n\t\t25- Trocar de arvore";
-    cout << "\n\t\t26- Comparar duas arvores"; 
-    cout << "\n\t\t 0- Sair";
-}
-
-void status(no *raiz[], int atual){
+void menu(no *raiz[], int atual){
     int nulas=0, i;
     for(i=0; i<qtdArv; i++)
         if(raiz[i]==NULL) nulas++;
-    cout << "\n\n\n\tSTATUS:";
-    cout << "\n\t\t+Disponiveis: " << qtdArv;
-    cout << "\n\t\t+Nulas: " <<  nulas;
-    cout << "\n\t\t+Inicializadas: " << qtdArv-nulas;
-    cout << "\n\t\t+Usando arvore: " << atual+1;
+    cout << "\n\n\n";
+    cout << "\n\t\t      ####               ####      ############     ####         ###     ###       ###";
+    cout << "\n\t\t      #####             #####      ############     #####        ###     ###       ###";
+    cout << "\n\t\t      ######           ######      ############     ######       ###     ###       ###            #####";
+    cout << "\n\t\t      ### ###         ### ###      ###              ### ###      ###     ###       ###          ##       ########            ";
+    cout << "\n\t\t      ###  ###       ###  ###      ###              ###  ###     ###     ###       ###           ##         ##      ###      ";
+    cout << "\n\t\t      ###   ###    ###    ###      ############     ###   ###    ###     ###       ###            ###       ##    ##   ##  ###### ";
+    cout << "\n\t\t      ###    ###  ###     ###      ############     ###    ###   ###     ###       ###              ###     ##    ##   ##    ##    ##  ##  ";  
+    cout << "\n\t\t      ###     ######      ###      ############     ###     ###  ###     ###       ###               ###    ##    #######    ##    ##  ##  ####";
+    cout << "\n\t\t      ###      ####       ###      ###              ###      ### ###     ###       ###               ###    ##    ##   ##    ##    ##  ##  ##";
+    cout << "\n\t\t      ###                 ###      ###              ###       ######     ###       ###            ####      ##    ##   ##    ##    ##  ##   ###";
+    cout << "\n\t\t      ###                 ###      ############     ###        #####     ###       ###         #####        ##    ##   ##    ##     ####  ####";
+    cout << "\n\t\t      ###                 ###      ############     ###         ####      ###     ###";
+    cout << "\n\t\t      ###                 ###      ############     ###          ###       #########";
+    cout << endl;
+    cout << left << setw(40) << "\n\t\t\t (1) Inserir" << "(14) Desvio padrao dos valores dos nos" << "                     -Disponiveis: " << qtdArv;
+    cout << left << setw(40) << "\n\t\t\t (2) Remover" << "(15) Quantidade de NULLs presente na arvore" << "                 Nula: " << nulas; 
+    cout << left << setw(40) << "\n\t\t\t (3) Buscar" << "(16) Quantidade de nos com dois filhos" << "                      Inicializadas: " << qtdArv-nulas; 
+    cout << left << setw(40) << "\n\t\t\t (4) Maior elemento" << "(17) Quantidade de nos com um filho"  << "                         Usando arvore: " << atual+1; 
+    cout << left << setw(40) << "\n\t\t\t (5) Menor elemento" << "(18) Quantidade de folhas"; 
+    cout << left << setw(40) << "\n\t\t\t (6) Quantidade de elementos(nos)" << "(19) Percorrer a arvore em ordem"; 
+    cout << left << setw(40) << "\n\t\t\t (7) Altura da arvore(niveis)" << "(20) Percorrer a arvore em preordem"; 
+    cout << left << setw(40) << "\n\t\t\t (8) Quantidade de pares e impares" << "(21) Percorrer a arvore em posordem";
+    cout << left << setw(40) << "\n\t\t\t (9) Multiplos de 'k' e quantidade" << "(22) Percorrer a arvore em largura"; 
+    cout << left << setw(40) << "\n\t\t\t(10) Ordem crescente" << "(23) Salvar a arvore em arquivo"; 
+    cout << left << setw(40) << "\n\t\t\t(11) Ordem decrescente" << "(24) Recuperar a arvore de arquivo"; 
+    cout << left << setw(40) << "\n\t\t\t(12) Soma dos valores dos nos" << "(25) Trocar de arvore"; 
+    cout << left << setw(40) << "\n\t\t\t(13) Media dos valores dos nos" << "(26) Comparar duas arvores";
+    cout << "\n\n\t\t\t\t\t\t\t(0) Sair";
 }
 
 void inserir(int n, no **raiz){
@@ -436,8 +429,7 @@ int main() {
 
     do {
 
-        menu();
-        status(raiz, atual); // Arvore sendo manipulada/ inicializadas e quais
+        menu(raiz, atual);
         cout << "\n\n\t\tOpcao: ";
         cin >> opcaoMenu;
         switch (opcaoMenu) {

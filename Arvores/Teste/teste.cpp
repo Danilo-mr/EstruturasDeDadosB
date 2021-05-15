@@ -126,12 +126,7 @@ int main() {
         }
         system("cls");
     } while(opc!=0);*/
-    
-    no *raiz[10];
-    no *raizAtual=raiz[0];
-
-    raiz = (no*) malloc(sizeof(no));
-    cout << raiz[0]->chave << endl;
-    cout << raizAtual->chave;
+    string x;
+    for(;;) cin >> x; 
     
 }
