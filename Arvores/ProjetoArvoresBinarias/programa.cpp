@@ -38,20 +38,20 @@ void menu(no *raiz[], int atual){
     cout << "\n\t\t      ###                 ###      ############     ###         ####      ###     ###";
     cout << "\n\t\t      ###                 ###      ############     ###          ###       #########";
     cout << endl;
-    cout << left << setw(40) << "\n\t\t\t (1) Inserir" << "(14) Desvio padrao dos valores dos nos" << "                     -Disponiveis: " << qtdArv;
-    cout << left << setw(40) << "\n\t\t\t (2) Remover" << "(15) Quantidade de NULLs presente na arvore" << "                 Nula: " << nulas; 
-    cout << left << setw(40) << "\n\t\t\t (3) Buscar" << "(16) Quantidade de nos com dois filhos" << "                      Inicializadas: " << qtdArv-nulas; 
-    cout << left << setw(40) << "\n\t\t\t (4) Maior elemento" << "(17) Quantidade de nos com um filho"  << "                         Usando arvore: " << atual+1; 
-    cout << left << setw(40) << "\n\t\t\t (5) Menor elemento" << "(18) Quantidade de folhas"; 
-    cout << left << setw(40) << "\n\t\t\t (6) Quantidade de elementos(nos)" << "(19) Percorrer a arvore em ordem"; 
-    cout << left << setw(40) << "\n\t\t\t (7) Altura da arvore(niveis)" << "(20) Percorrer a arvore em preordem"; 
-    cout << left << setw(40) << "\n\t\t\t (8) Quantidade de pares e impares" << "(21) Percorrer a arvore em posordem";
+    cout << left << setw(40) << "\n\t\t\t (1) Inserir" << "(14) Desvio padrao dos valores dos nos" << "       ";
+    cout << left << setw(40) << "\n\t\t\t (2) Remover" << "(15) Quantidade de NULLs presente na arvore";
+    cout << left << setw(40) << "\n\t\t\t (3) Buscar" << "(16) Quantidade de nos com dois filhos" << right << setw(47) <<"#Arvores Disponiveis: " << qtdArv; 
+    cout << left << setw(40) << "\n\t\t\t (4) Maior elemento" << "(17) Quantidade de nos com um filho"; 
+    cout << left << setw(40) << "\n\t\t\t (5) Menor elemento" << "(18) Quantidade de folhas" << right << setw(61) << "()Nulas         : " << nulas; 
+    cout << left << setw(40) << "\n\t\t\t (6) Quantidade de elementos(nos)" << "(19) Percorrer a arvore em ordem" << right << setw(54) << "()Inicializadas : " << qtdArv-nulas; 
+    cout << left << setw(40) << "\n\t\t\t (7) Altura da arvore(niveis)" << "(20) Percorrer a arvore em preordem" << "                                          "; 
+    cout << left << setw(40) << "\n\t\t\t (8) Quantidade de pares e impares" << "(21) Percorrer a arvore em posordem" << right << setw(43) << "    #Arvore atual: " << atual+1;
     cout << left << setw(40) << "\n\t\t\t (9) Multiplos de 'k' e quantidade" << "(22) Percorrer a arvore em largura"; 
     cout << left << setw(40) << "\n\t\t\t(10) Ordem crescente" << "(23) Salvar a arvore em arquivo"; 
     cout << left << setw(40) << "\n\t\t\t(11) Ordem decrescente" << "(24) Recuperar a arvore de arquivo"; 
     cout << left << setw(40) << "\n\t\t\t(12) Soma dos valores dos nos" << "(25) Trocar de arvore"; 
     cout << left << setw(40) << "\n\t\t\t(13) Media dos valores dos nos" << "(26) Comparar duas arvores";
-    cout << "\n\n\t\t\t\t\t\t\t(0) Sair";
+    cout << "\n\n\t\t\t\t\t\t(0) Sair";
 }
 
 void inserir(int n, no **raiz){
@@ -62,7 +62,7 @@ void inserir(int n, no **raiz){
             cout << "\n\t\tHeap Overflow";
         }
         (*raiz)->chave=n;
-        cout << "\n\t\tElemento inserido com SUCESSO!";
+        cout << "\n\tElemento inserido com SUCESSO!";
         (*raiz)->esq = (*raiz)->dir =NULL;
         return;
     } else {
@@ -72,7 +72,7 @@ void inserir(int n, no **raiz){
             if(n > (*raiz)->chave)
                 inserir(n, &(*raiz)->dir);
             else
-                cout << "Elemento ja existe!\n";
+                cout << "\n\tElemento ja existe!\n";
         }
     }
 }
@@ -113,13 +113,13 @@ void removerArv(no **raiz, int n){
             } 
             else
                 (*raiz)->chave=mydel(&(*raiz)->esq);
-            cout << "\nRemovido com SUCESSO!";
+            cout << "\n\tRemovido com SUCESSO!";
             return;  
         }
         else if (n<(*raiz)->chave) removerArv(&(*raiz)->esq, n);
         else if (n>(*raiz)->chave) removerArv(&(*raiz)->dir, n);
     } else 
-        cout << "\nElemento nao existe";
+        cout << "\n\tElemento nao existe";
 }
 
 int maiorElem(no *raiz){
@@ -325,22 +325,17 @@ void removerFila(dado **fila){
     }
 }
 
-int encontrar(int x, no **raiz){
-    if((*raiz)!=NULL){
-        if((*raiz)->chave==x) return 1;
-        else if(x<(*raiz)->chave){
-            if(encontrar(x, &(*raiz)->esq)==1) (*raiz)=(*raiz)->esq;
-        }
-        else if(x>(*raiz)->chave){
-            if(encontrar(x, &(*raiz)->dir)==1) (*raiz)=(*raiz)->dir;
-        }
-        return 1;
-    }
+no* encontrar(int x, no **raiz){
+    if((*raiz)==NULL) return NULL;
+    else if((*raiz)->chave==x) return (*raiz);
+    else if(x<(*raiz)->chave) return(encontrar(x, &(*raiz)->esq));
+    else return(encontrar(x, &(*raiz)->dir));
 }
 
 void inserirFila(dado **fila, no *raiz){
     dado *aux, *aux2;
-    encontrar((*fila)->cod, &raiz);
+    no *raizAux=raiz;
+    raiz=encontrar((*fila)->cod, &raizAux);
     if(raiz->esq!=NULL) {
         aux2=(*fila);
         while(aux2->prox!=NULL) aux2=aux2->prox;
@@ -372,6 +367,7 @@ void largura(no *raiz, dado **fila){
     } else 
         cout << "\n\tArvore vazia";
 }
+
 
 void salvar(no *raiz, ofstream *arquivoS){
     if(raiz!=NULL) {
@@ -428,7 +424,10 @@ int main() {
     for(int i=0; i<qtdArv; i++) raiz[i]=NULL;
 
     do {
-
+        cout << "\n\n\t\t\t\t\t\t\t[PRESS ENTER]";
+        cin.ignore();
+        cin.get();
+        system("cls");
         menu(raiz, atual);
         cout << "\n\n\t\tOpcao: ";
         cin >> opcaoMenu;
@@ -470,6 +469,7 @@ int main() {
                 break;
             
             case 4:
+                
                 cout << "\n\tMAIOR ELEMENTO: " << maiorElem(raiz[atual]);
                 break;
 
@@ -490,19 +490,26 @@ int main() {
                 break;
 
             case 9:
-                cout << "\n\tValor de 'K' :";
-                cin >> k; 
-                cout << "\n\t" << k << " = { ";
-                qtd=multiplos(raiz[atual], k);
-                cout << "}";
-                cout << "\n\t" << qtd << " multiplos de " << k;
+                do{
+                    cout << "\n\tValor de 'K' :";
+                    cin >> k; 
+                    cout << "\n\t" << k << " = { ";
+                    qtd=multiplos(raiz[atual], k);
+                    cout << "}";
+                    cout << "\n\t" << qtd << " multiplos de " << k;
+                    cout << "\n\n\tInserir outro valor de 'k'?[S/N] ";
+                    cin >> resp;
+                    resp=toupper(resp);
+                } while(resp!='N');
                 break;
 
             case 10:
+                cout << "\n\t";
                 em(raiz[atual]);
                 break;
             
             case 11:
+                cout << "\n\t";
                 decrescente(raiz[atual]);
                 break;
 
@@ -537,18 +544,23 @@ int main() {
                 break;
             
             case 19:
+                cout << "\n\t";
                 em(raiz[atual]);
                 break;
 
             case 20:
+                cout << "\n\t";
                 pre(raiz[atual]);
                 break;
 
             case 21:
+                cout << "\n\t";
                 pos(raiz[atual]);
                 break;
             
             case 22:
+                cout << "\n\t";
+                fila=NULL;
                 largura(raiz[atual], &fila);
                 break;
 
@@ -569,11 +581,13 @@ int main() {
                 cout << "\n\tNome do arquivo: ";
                 cin >> nomeArq;
                 arquivoE.open(nomeArq);
+                raiz[atual]=NULL;
                 if(arquivoE.is_open() && arquivoE.good()){
                     while(arquivoE >> linha)
                         inserir(linha, &raiz[atual]);
                 } else
                     cout << "\n\tArquivo nao existe!";
+                arquivoE.close();
                 break;
 
             case 25:

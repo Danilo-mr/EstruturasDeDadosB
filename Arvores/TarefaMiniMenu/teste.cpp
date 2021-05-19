@@ -77,7 +77,7 @@ void pos(no *raiz) {
 }
 
 int main() {
-    /*no *raiz=NULL;
+    no *raiz=NULL;
     int opc, opc2, n;
     char resp;
     do {
@@ -125,8 +125,6 @@ int main() {
             break;
         }
         system("cls");
-    } while(opc!=0);*/
-    string x;
-    for(;;) cin >> x; 
+    } while(opc!=0);
     
 }
