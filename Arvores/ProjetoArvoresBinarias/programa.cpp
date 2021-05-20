@@ -23,6 +23,7 @@ void menu(no *raiz[], int atual){
     int nulas=0, i;
     for(i=0; i<qtdArv; i++)
         if(raiz[i]==NULL) nulas++;
+    
     cout << "\n\n\n";
     cout << "\n\t\t      ####               ####      ############     ####         ###     ###       ###";
     cout << "\n\t\t      #####             #####      ############     #####        ###     ###       ###";
@@ -545,17 +546,20 @@ int main() {
             
             case 19:
                 cout << "\n\t";
-                em(raiz[atual]);
+                if(raiz[atual]==NULL) cout << "\n\tArvore vazia";
+                else em(raiz[atual]);
                 break;
 
             case 20:
                 cout << "\n\t";
-                pre(raiz[atual]);
+                if(raiz[atual]==NULL) cout << "\n\tArvore vazia";
+                else pre(raiz[atual]);
                 break;
 
             case 21:
                 cout << "\n\t";
-                pos(raiz[atual]);
+                if(raiz[atual]==NULL) cout << "\n\tArvore vazia";
+                else pos(raiz[atual]);
                 break;
             
             case 22:
