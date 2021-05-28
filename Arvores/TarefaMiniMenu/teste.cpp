@@ -1,19 +1,5 @@
-/*Implementar um programa para manipulação de árvores binárias de busca.
-
-O programa deve ter como base um menu de opções com pelo menos as seguintes funções:
-
-- Inserção de um elemento N na árvore;
-
-- Consulta (verifica se um número está armazenado na árvores);
-
-- Percursos preordem, em ordem e posordem.
-
-*/
 #include <iostream>
 #include <stdlib.h>
-#include <math.h>
-#include <fstream>
-#include <iomanip>
 
 using namespace std;
 
@@ -77,7 +63,7 @@ void pos(no *raiz) {
 }
 
 int main() {
-    no *raiz=NULL;
+    /*no *raiz=NULL;
     int opc, opc2, n;
     char resp;
     do {
@@ -125,6 +111,6 @@ int main() {
             break;
         }
         system("cls");
-    } while(opc!=0);
+    } while(opc!=0);*/
     
 }

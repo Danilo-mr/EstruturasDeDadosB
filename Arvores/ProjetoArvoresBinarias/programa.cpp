@@ -6,7 +6,7 @@
 #include <iomanip>
 using namespace std;
 
-#define qtdArv 100
+#define qtdArv 10000
 
 struct no{
     int chave;
@@ -21,8 +21,10 @@ struct dado{
 
 void menu(no *raiz[], int atual){
     int nulas=0, i;
-    for(i=0; i<qtdArv; i++)
+    for(i=0; i<qtdArv; i++){
         if(raiz[i]==NULL) nulas++;
+        else cout << "Arvore " << i+1;
+    }
     
     cout << "\n\n\n";
     cout << "\n\t\t      ####               ####      ############     ####         ###     ###       ###";
@@ -55,17 +57,14 @@ void menu(no *raiz[], int atual){
     cout << "\n\n\t\t\t\t\t\t(0) Sair";
 }
 
-void inserir(int n, no **raiz){
+int inserir(int n, no **raiz){
     if((*raiz)==NULL)
     {
         *raiz = (no*) malloc(sizeof(no));
-        if((*raiz)==NULL){
-            cout << "\n\t\tHeap Overflow";
-        }
+        if((*raiz)==NULL) return -1;
         (*raiz)->chave=n;
-        cout << "\n\tElemento inserido com SUCESSO!";
         (*raiz)->esq = (*raiz)->dir =NULL;
-        return;
+        return 1; 
     } else {
         if(n < (*raiz)->chave) 
             inserir(n, &(*raiz)->esq);
@@ -73,7 +72,7 @@ void inserir(int n, no **raiz){
             if(n > (*raiz)->chave)
                 inserir(n, &(*raiz)->dir);
             else
-                cout << "\n\tElemento ja existe!\n";
+                return 0;
         }
     }
 }
@@ -404,9 +403,39 @@ int valoresIguais(no *raiz1, no *raiz2){
     } else return 1;
 }
 
+void uniao(no *r1, no *r2, no **r3){
+    if(r1!=NULL){
+        inserir(r1->chave, r3);
+        if(r1->esq!=NULL) uniao(r1->esq, r2, r3);
+        if(r2->dir!=NULL) uniao(r1->dir, r2, r3);
+        r1=NULL;
+    }
+    if(r2!=NULL){
+        inserir(r2->chave, r3);
+        if(r2->esq!=NULL) uniao(r1, r2->esq, r3);
+        if(r2->dir!=NULL) uniao(r1, r2->dir, r3);
+    }
+}
+
+void interseccao (no *r1, no *r2, no **r3){
+    if(r1!=NULL){
+        if(busca(r1->chave, r2)==1) inserir(r1->chave, r3);
+        if(r1->esq!=NULL) interseccao(r1->esq, r2, r3);
+        if(r1->dir!=NULL) interseccao(r1->dir, r2, r3);
+        r1=NULL;
+    }
+    if(r2!=NULL){
+        if(busca(r2->chave, r1)==1) inserir(r2->chave, r3);
+        if(r2->esq!=NULL) interseccao(r1, r2->esq, r3);
+        if(r2->dir!=NULL) interseccao(r1, r2->dir, r3);
+    }
+}
+
+
 int main() {
     no *raiz[qtdArv];
     no *raizAux=NULL;
+    no *raizAux2=NULL;
     dado *fila=NULL;
   
     int opcaoMenu, n, qtd, k, atual=0, linha;
@@ -437,7 +466,10 @@ int main() {
                 do {
                     cout << "\n\n\tInserir valor.... ";
                     cin >> n;
-                    inserir(n, &raiz[atual]);
+                    n=inserir(n, &raiz[atual]);
+                    if(n==1) cout << "\n\tElemento inserido com SUCESSO!";
+                    else if(n==0) cout << "\n\tElemento ja existe!";
+                    else cout << "\n\t\tHeap Overflow";
                     cout << "\n\tInserir mais elementos?[S/N] : ";
                     cin >> resp;
                     resp=toupper(resp);
@@ -609,7 +641,28 @@ int main() {
                 else if(mesmaEstrutura(raiz[atual], raizAux)) cout << "\n\tPossuem a mesma estrutura com valores diferente";
                 else if(qtdElem(raiz[atual])==qtdElem(raizAux) && valoresIguais(raiz[atual], raizAux)) cout << "\n\tPossuem os mesmos valores com estruturas diferentes";
                 else cout << "\n\tSao totalmente diferentes";               
-                break;                
+                break;
+
+            case 27:
+                cout << "\n\tUniao da arvore ";
+                cin >> n;
+                raizAux=raiz[n-1];
+                cout << "\n\tcom arvore ";
+                cin >> n;
+                raizAux2=raiz[n-1];
+                uniao(raizAux, raizAux2, &raiz[atual]);
+                break;
+
+            case 28:
+                cout << "\n\tInterseccao da arvore ";
+                cin >> n;
+                raizAux=raiz[n-1];
+                cout << "\n\tcom a arvore ";
+                cin >> n;
+                raizAux2=raiz[n-1];
+                interseccao(raizAux, raizAux2, &raiz[atual]);
+                break;
+            
             default:
             break;
         }
