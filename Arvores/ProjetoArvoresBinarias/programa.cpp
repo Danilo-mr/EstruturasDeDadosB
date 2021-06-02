@@ -422,12 +422,6 @@ void interseccao (no *r1, no *r2, no **r3){
         if(busca(r1->chave, r2)==1) inserir(r1->chave, r3);
         if(r1->esq!=NULL) interseccao(r1->esq, r2, r3);
         if(r1->dir!=NULL) interseccao(r1->dir, r2, r3);
-        r1=NULL;
-    }
-    if(r2!=NULL){
-        if(busca(r2->chave, r1)==1) inserir(r2->chave, r3);
-        if(r2->esq!=NULL) interseccao(r1, r2->esq, r3);
-        if(r2->dir!=NULL) interseccao(r1, r2->dir, r3);
     }
 }
 
